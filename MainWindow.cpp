@@ -433,7 +433,7 @@ void MainWindow::createRentReturnForm() {
                     break;
                 }
             }
-            refreshVehicleTable(); // Also refresh main dashboard
+            onSearchTextChanged(); // Preserve search state on dashboard
         } else {
             QMessageBox::warning(this, "Error", "This vehicle is already rented or not found.");
         }
@@ -460,7 +460,7 @@ void MainWindow::createRentReturnForm() {
                     break;
                 }
             }
-            refreshVehicleTable(); // Also refresh main dashboard
+            onSearchTextChanged(); // Preserve search state on dashboard
         } else {
             QMessageBox::warning(this, "Error", "This vehicle is not currently rented or not found.");
         }
@@ -496,7 +496,7 @@ void MainWindow::populateTable(const std::vector<Vehicle*>& vehicles) {
 
 void MainWindow::showDashboard() {
     stackedWidget->setCurrentIndex(0);
-    refreshVehicleTable();
+    onSearchTextChanged(); // Refresh with current search state
 }
 
 void MainWindow::showAddVehicleForm() {
@@ -543,7 +543,7 @@ void MainWindow::addVehicle() {
     baseRateInput->clear();
     
     QMessageBox::information(this, "Success", "Vehicle added successfully!");
-    refreshVehicleTable();
+    onSearchTextChanged(); // Preserve search state
 }
 
 void MainWindow::removeSelectedVehicle() {
@@ -563,7 +563,7 @@ void MainWindow::removeSelectedVehicle() {
     if (reply == QMessageBox::Yes) {
         if (rentalManager->removeVehicle(vehicleId)) {
             QMessageBox::information(this, "Success", "Vehicle removed successfully!");
-            refreshVehicleTable();
+            onSearchTextChanged(); // Preserve search state
         } else {
             QMessageBox::warning(this, "Error", "Failed to remove vehicle.");
         }
@@ -581,7 +581,7 @@ void MainWindow::rentSelectedVehicle() {
     
     if (rentalManager->rentVehicle(vehicleId)) {
         QMessageBox::information(this, "Success", "Vehicle rented successfully!");
-        refreshVehicleTable();
+        onSearchTextChanged(); // Preserve search state
     } else {
         QMessageBox::warning(this, "Error", "This vehicle is already rented or not found.");
     }
@@ -598,7 +598,7 @@ void MainWindow::returnSelectedVehicle() {
     
     if (rentalManager->returnVehicle(vehicleId)) {
         QMessageBox::information(this, "Success", "Vehicle returned successfully!");
-        refreshVehicleTable();
+        onSearchTextChanged(); // Preserve search state
     } else {
         QMessageBox::warning(this, "Error", "This vehicle is not currently rented or not found.");
     }

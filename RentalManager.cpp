@@ -50,10 +50,15 @@ std::vector<Vehicle*> RentalManager::searchVehicles(const QString& searchTerm, c
         } else {
             // Search by filter type
             if (filterType == "All") {
+                // Cache lowercase strings to avoid repeated conversions
+                QString lowerBrand = vehicle->getBrand().toLower();
+                QString lowerModel = vehicle->getModel().toLower();
+                QString lowerType = vehicle->getType().toLower();
+                
                 matches = QString::number(vehicle->getId()).contains(lowerSearchTerm) ||
-                         vehicle->getBrand().toLower().contains(lowerSearchTerm) ||
-                         vehicle->getModel().toLower().contains(lowerSearchTerm) ||
-                         vehicle->getType().toLower().contains(lowerSearchTerm);
+                         lowerBrand.contains(lowerSearchTerm) ||
+                         lowerModel.contains(lowerSearchTerm) ||
+                         lowerType.contains(lowerSearchTerm);
             } else if (filterType == "ID") {
                 matches = QString::number(vehicle->getId()).contains(lowerSearchTerm);
             } else if (filterType == "Type") {
