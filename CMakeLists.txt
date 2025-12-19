@@ -23,6 +23,7 @@ set(SOURCES
     DatabaseManager.cpp
     AuthManager.cpp
     LoginWindow.cpp
+    User.cpp
 )
 
 # Header files

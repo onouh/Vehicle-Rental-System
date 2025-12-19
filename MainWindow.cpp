@@ -630,6 +630,8 @@ void MainWindow::onSearchTextChanged() {
     
     // Update table with filtered results
     populateTable(filteredVehicles);
+}
+
 void MainWindow::createCustomerManagementView() {
     QWidget* customerWidget = new QWidget();
     customerWidget->setObjectName("contentWidget");
