@@ -24,6 +24,7 @@ The application has a sidebar navigation with three main sections:
 
 ### Features
 - View complete fleet in a table format
+- **Search and filter vehicles** by multiple criteria
 - See vehicle details: ID, Type, Brand, Model, Rate/Day, Status
 - Select vehicles for removal
 - Refresh the table to see latest updates
@@ -35,6 +36,33 @@ The application has a sidebar navigation with three main sections:
 - **Model**: Model name (e.g., Camry, MT-07)
 - **Rate/Day**: Daily rental rate in dollars
 - **Status**: Available or Rented
+
+### Search Functionality
+
+The dashboard includes a powerful search feature to quickly find vehicles:
+
+#### Search Components
+1. **Search Input Box**: Enter your search term (case-insensitive)
+2. **Filter Dropdown**: Choose what to search by:
+   - **All**: Searches across ID, Type, Brand, and Model
+   - **ID**: Search by vehicle ID number
+   - **Type**: Search by vehicle type (Car or Bike)
+   - **Brand**: Search by manufacturer
+   - **Model**: Search by model name
+   - **Status**: Search by rental status (Available or Rented)
+
+#### How to Search
+1. Select a filter from the dropdown (optional, defaults to "All")
+2. Type your search term in the search box
+3. Results update automatically as you type
+4. Clear the search box to show all vehicles again
+
+#### Search Examples
+- **Find all Toyotas**: Set filter to "Brand", type "toyota"
+- **Find available vehicles**: Set filter to "Status", type "available"
+- **Find all bikes**: Set filter to "Type", type "bike"
+- **Find vehicle #3**: Set filter to "ID", type "3"
+- **Find Camry models**: Set filter to "Model", type "camry"
 
 ### Actions
 - **Refresh**: Updates the table with current data
@@ -171,6 +199,15 @@ You can remove these vehicles or add your own.
 3. Click "Remove Selected"
 4. Confirm removal
 5. Vehicle is deleted from fleet
+
+### Workflow 5: Search for Specific Vehicles
+
+1. Go to "Dashboard"
+2. Select filter type (e.g., "Brand")
+3. Type search term (e.g., "toyota")
+4. View filtered results
+5. Select and perform actions (rent, remove, etc.)
+6. Clear search to show all vehicles again
 
 ## Tips and Best Practices
 

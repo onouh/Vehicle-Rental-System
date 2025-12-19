@@ -35,6 +35,7 @@ cmake --build .
 - Rent available vehicles
 - Return rented vehicles
 - View vehicle status and details
+- **Search and filter vehicles** by ID, Type, Brand, Model, or Status
 
 ### Technical Highlights
 - **Abstract base class** `Vehicle` with pure virtual functions
@@ -42,6 +43,7 @@ cmake --build .
 - **RentalManager** class using `std::vector<Vehicle*>` for polymorphic fleet management
 - **Modern Qt6 GUI** with QStackedWidget, QTableWidget, and custom QSS styling
 - **Dark theme** with rounded corners, accent colors, and professional appearance
+- **Real-time search** functionality with multiple filter options
 
 ## Architecture
 
