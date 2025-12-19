@@ -50,3 +50,24 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets Qt6::Sql)
 set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
+
+# Screenshot capture tool
+set(SCREENSHOT_SOURCES
+    screenshot_main.cpp
+    Vehicle.cpp
+    Car.cpp
+    Bike.cpp
+    Customer.cpp
+    RentalManager.cpp
+    MainWindow.cpp
+    DatabaseManager.cpp
+    AuthManager.cpp
+    LoginWindow.cpp
+    User.cpp
+)
+
+add_executable(ScreenshotCapture ${SCREENSHOT_SOURCES} ${HEADERS})
+target_link_libraries(ScreenshotCapture PRIVATE Qt6::Widgets Qt6::Sql)
+set_target_properties(ScreenshotCapture PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+)
