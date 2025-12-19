@@ -142,6 +142,26 @@ cmake --build .
 
 ## 📸 Screenshots & GUI Documentation
 
+### 🖼️ Actual GUI Screenshots (PNG Files)
+
+All GUI windows have been captured as high-quality PNG screenshots:
+
+📁 **[screenshots.html](screenshots.html)** - Interactive HTML gallery viewer for all screenshots
+
+📄 **[SCREENSHOTS.md](SCREENSHOTS.md)** - Comprehensive documentation of all screenshots
+
+**Available Screenshots:**
+1. **01_login_window.png** (400×350px) - Login and authentication screen
+2. **02_main_dashboard.png** (1200×700px) - Vehicle fleet dashboard with search
+3. **03_add_vehicle_form.png** (1200×700px) - Add vehicle form (Cars & Bikes)
+4. **04_rent_return_interface.png** (1200×700px) - Rent/Return management
+5. **05_customer_management.png** (1200×700px) - Customer add/remove interface
+6. **06_reservations_view.png** (1200×700px) - Reservations tracking view
+
+*Screenshots captured using custom Qt C++ tool with xvfb virtual display.*
+
+---
+
 See images above for Login, Dashboard, and Add Vehicle views.
 
 ### 🎨 Complete GUI Reference
