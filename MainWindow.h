@@ -20,6 +20,10 @@ private:
     QStackedWidget* stackedWidget;
     QTableWidget* vehicleTable;
     
+    // Search widgets
+    QLineEdit* searchInput;
+    QComboBox* searchFilterCombo;
+    
     // Input widgets for adding vehicles
     QLineEdit* brandInput;
     QLineEdit* modelInput;
@@ -47,6 +51,7 @@ private slots:
     void rentSelectedVehicle();
     void returnSelectedVehicle();
     void onVehicleTypeChanged(int index);
+    void onSearchTextChanged();
 
 public:
     MainWindow(QWidget *parent = nullptr);

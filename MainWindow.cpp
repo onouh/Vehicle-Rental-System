@@ -232,6 +232,29 @@ void MainWindow::createDashboard() {
     titleLabel->setObjectName("titleLabel");
     layout->addWidget(titleLabel);
     
+    // Search bar
+    QHBoxLayout* searchLayout = new QHBoxLayout();
+    searchLayout->setSpacing(10);
+    
+    QLabel* searchLabel = new QLabel("Search:");
+    searchInput = new QLineEdit();
+    searchInput->setPlaceholderText("Enter search term...");
+    searchInput->setMinimumWidth(300);
+    connect(searchInput, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
+    
+    searchFilterCombo = new QComboBox();
+    searchFilterCombo->addItems({"All", "ID", "Type", "Brand", "Model", "Status"});
+    searchFilterCombo->setMinimumWidth(120);
+    connect(searchFilterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &MainWindow::onSearchTextChanged);
+    
+    searchLayout->addWidget(searchLabel);
+    searchLayout->addWidget(searchInput);
+    searchLayout->addWidget(searchFilterCombo);
+    searchLayout->addStretch();
+    
+    layout->addLayout(searchLayout);
+    
     // Table
     vehicleTable = new QTableWidget();
     vehicleTable->setColumnCount(6);
@@ -584,5 +607,26 @@ void MainWindow::onVehicleTypeChanged(int index) {
     } else { // Bike
         numDoorsWidget->hide();
         engineCapacityWidget->show();
+    }
+}
+
+void MainWindow::onSearchTextChanged() {
+    QString searchTerm = searchInput->text().trimmed();
+    QString filterType = searchFilterCombo->currentText();
+    
+    // Get filtered vehicles
+    std::vector<Vehicle*> filteredVehicles = rentalManager->searchVehicles(searchTerm, filterType);
+    
+    // Update table with filtered results
+    vehicleTable->setRowCount(filteredVehicles.size());
+    
+    for (size_t i = 0; i < filteredVehicles.size(); ++i) {
+        Vehicle* v = filteredVehicles[i];
+        vehicleTable->setItem(i, 0, new QTableWidgetItem(QString::number(v->getId())));
+        vehicleTable->setItem(i, 1, new QTableWidgetItem(v->getType()));
+        vehicleTable->setItem(i, 2, new QTableWidgetItem(v->getBrand()));
+        vehicleTable->setItem(i, 3, new QTableWidgetItem(v->getModel()));
+        vehicleTable->setItem(i, 4, new QTableWidgetItem(QString("$%1").arg(v->getBaseRate(), 0, 'f', 2)));
+        vehicleTable->setItem(i, 5, new QTableWidgetItem(v->getIsRented() ? "Rented" : "Available"));
     }
 }

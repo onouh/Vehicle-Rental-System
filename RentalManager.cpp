@@ -37,6 +37,45 @@ Vehicle* RentalManager::findVehicle(int id) {
     return (it != fleet.end()) ? *it : nullptr;
 }
 
+std::vector<Vehicle*> RentalManager::searchVehicles(const QString& searchTerm, const QString& filterType) const {
+    std::vector<Vehicle*> results;
+    QString lowerSearchTerm = searchTerm.toLower();
+    
+    for (Vehicle* vehicle : fleet) {
+        bool matches = false;
+        
+        // If search term is empty, include all vehicles
+        if (lowerSearchTerm.isEmpty()) {
+            matches = true;
+        } else {
+            // Search by filter type
+            if (filterType == "All") {
+                matches = QString::number(vehicle->getId()).contains(lowerSearchTerm) ||
+                         vehicle->getBrand().toLower().contains(lowerSearchTerm) ||
+                         vehicle->getModel().toLower().contains(lowerSearchTerm) ||
+                         vehicle->getType().toLower().contains(lowerSearchTerm);
+            } else if (filterType == "ID") {
+                matches = QString::number(vehicle->getId()).contains(lowerSearchTerm);
+            } else if (filterType == "Type") {
+                matches = vehicle->getType().toLower().contains(lowerSearchTerm);
+            } else if (filterType == "Brand") {
+                matches = vehicle->getBrand().toLower().contains(lowerSearchTerm);
+            } else if (filterType == "Model") {
+                matches = vehicle->getModel().toLower().contains(lowerSearchTerm);
+            } else if (filterType == "Status") {
+                QString status = vehicle->getIsRented() ? "rented" : "available";
+                matches = status.contains(lowerSearchTerm);
+            }
+        }
+        
+        if (matches) {
+            results.push_back(vehicle);
+        }
+    }
+    
+    return results;
+}
+
 bool RentalManager::rentVehicle(int id) {
     Vehicle* vehicle = findVehicle(id);
     if (vehicle && !vehicle->getIsRented()) {

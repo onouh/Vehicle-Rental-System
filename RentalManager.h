@@ -18,6 +18,7 @@ public:
     void addVehicle(Vehicle* vehicle);
     bool removeVehicle(int id);
     Vehicle* findVehicle(int id);
+    std::vector<Vehicle*> searchVehicles(const QString& searchTerm, const QString& filterType) const;
 
     // Rental operations
     bool rentVehicle(int id);
