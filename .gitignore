@@ -1,0 +1,40 @@
+# Build directories
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Qt generated files
+*.autosave
+*.qm
+*.qrc.depends
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+
+# Executable
+VehicleRentalSystem
+*.exe
+
+# IDE files
+.vscode/
+.idea/
+*.pro.user
+*.user
+
+# Compiled Object files
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+
+# Temporary files
+*~
+*.swp
+*.swo
+.DS_Store
