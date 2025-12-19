@@ -2,6 +2,7 @@
 #include "Car.h"
 #include "Bike.h"
 #include "Customer.h"
+#include "DatabaseManager.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QFormLayout>
@@ -15,11 +16,12 @@ MainWindow::MainWindow(QWidget *parent)
     setupUI();
     applyStyles();
     
-    // Add some sample vehicles
-    rentalManager->addVehicle(new Car(rentalManager->getNextId(), "Toyota", "Camry", 50.0, 4));
-    rentalManager->addVehicle(new Car(rentalManager->getNextId(), "Honda", "Civic", 45.0, 4));
-    rentalManager->addVehicle(new Bike(rentalManager->getNextId(), "Yamaha", "MT-07", 30.0, 689));
-    rentalManager->addVehicle(new Bike(rentalManager->getNextId(), "Kawasaki", "Ninja 400", 35.0, 399));
+    // Note: Sample vehicles are now managed via database
+    // Uncomment below to add vehicles to in-memory fleet for legacy compatibility
+    // rentalManager->addVehicle(new Car(rentalManager->getNextId(), "Toyota", "Camry", 50.0, 4));
+    // rentalManager->addVehicle(new Car(rentalManager->getNextId(), "Honda", "Civic", 45.0, 4));
+    // rentalManager->addVehicle(new Bike(rentalManager->getNextId(), "Yamaha", "MT-07", 30.0, 689));
+    // rentalManager->addVehicle(new Bike(rentalManager->getNextId(), "Kawasaki", "Ninja 400", 35.0, 399));
     
     refreshVehicleTable();
 }
@@ -66,10 +68,15 @@ void MainWindow::setupUI() {
     customersBtn->setObjectName("sidebarButton");
     connect(customersBtn, &QPushButton::clicked, this, &MainWindow::showCustomerManagement);
     
+    QPushButton* reservationsBtn = new QPushButton("Reservations");
+    reservationsBtn->setObjectName("sidebarButton");
+    connect(reservationsBtn, &QPushButton::clicked, this, &MainWindow::showReservations);
+    
     sidebarLayout->addWidget(dashboardBtn);
     sidebarLayout->addWidget(addVehicleBtn);
     sidebarLayout->addWidget(rentReturnBtn);
     sidebarLayout->addWidget(customersBtn);
+    sidebarLayout->addWidget(reservationsBtn);
     sidebarLayout->addStretch();
     
     // Stacked widget for content
@@ -79,6 +86,7 @@ void MainWindow::setupUI() {
     createAddVehicleForm();
     createRentReturnForm();
     createCustomerManagementView();
+    createReservationView();
     
     // Add widgets to main layout
     mainLayout->addWidget(sidebar);
@@ -503,6 +511,7 @@ void MainWindow::populateTable(const std::vector<Vehicle*>& vehicles) {
 
 void MainWindow::showDashboard() {
     stackedWidget->setCurrentIndex(0);
+    refreshVehicleTableFromDB(); // Refresh from database
     onSearchTextChanged(); // Refresh with current search state
 }
 
@@ -764,5 +773,74 @@ void MainWindow::refreshCustomerTable() {
         customerTable->setItem(i, 1, new QTableWidgetItem(c->getName()));
         customerTable->setItem(i, 2, new QTableWidgetItem(c->getEmail()));
         customerTable->setItem(i, 3, new QTableWidgetItem(c->getPhone()));
+    }
+}
+
+void MainWindow::createReservationView() {
+    QWidget* reservationWidget = new QWidget();
+    reservationWidget->setObjectName("contentWidget");
+    QVBoxLayout* layout = new QVBoxLayout(reservationWidget);
+    layout->setContentsMargins(30, 30, 30, 30);
+    layout->setSpacing(20);
+    
+    // Title
+    QLabel* titleLabel = new QLabel("Reservations");
+    titleLabel->setStyleSheet("font-size: 24px; font-weight: bold; color: #ffffff;");
+    layout->addWidget(titleLabel);
+    
+    // Reservation table
+    reservationTable = new QTableWidget();
+    reservationTable->setColumnCount(7);
+    reservationTable->setHorizontalHeaderLabels({"ID", "User ID", "Vehicle ID", "Start Date", "End Date", "Total Cost", "Status"});
+    reservationTable->horizontalHeader()->setStretchLastSection(true);
+    reservationTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    reservationTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    layout->addWidget(reservationTable);
+    
+    // Buttons
+    QHBoxLayout* buttonLayout = new QHBoxLayout();
+    QPushButton* refreshBtn = new QPushButton("Refresh");
+    connect(refreshBtn, &QPushButton::clicked, this, &MainWindow::showReservations);
+    buttonLayout->addWidget(refreshBtn);
+    buttonLayout->addStretch();
+    layout->addLayout(buttonLayout);
+    
+    stackedWidget->addWidget(reservationWidget);
+}
+
+void MainWindow::showReservations() {
+    stackedWidget->setCurrentIndex(4);  // Assuming this is the 5th view
+    
+    // Load reservations from database
+    DatabaseManager* dbManager = DatabaseManager::getInstance();
+    QVector<Reservation> reservations = dbManager->getAllReservations();
+    
+    reservationTable->setRowCount(reservations.size());
+    for (int i = 0; i < reservations.size(); ++i) {
+        const Reservation& res = reservations[i];
+        reservationTable->setItem(i, 0, new QTableWidgetItem(QString::number(res.id)));
+        reservationTable->setItem(i, 1, new QTableWidgetItem(QString::number(res.userId)));
+        reservationTable->setItem(i, 2, new QTableWidgetItem(QString::number(res.vehicleId)));
+        reservationTable->setItem(i, 3, new QTableWidgetItem(res.startDate));
+        reservationTable->setItem(i, 4, new QTableWidgetItem(res.endDate));
+        reservationTable->setItem(i, 5, new QTableWidgetItem(QString("$%1").arg(res.totalCost, 0, 'f', 2)));
+        reservationTable->setItem(i, 6, new QTableWidgetItem(res.status));
+    }
+}
+
+void MainWindow::refreshVehicleTableFromDB() {
+    // Load vehicles from database and display them
+    DatabaseManager* dbManager = DatabaseManager::getInstance();
+    QVector<QStringList> dbVehicles = dbManager->getAllVehicles();
+    
+    vehicleTable->setRowCount(dbVehicles.size());
+    for (int i = 0; i < dbVehicles.size(); ++i) {
+        const QStringList& vehicle = dbVehicles[i];
+        vehicleTable->setItem(i, 0, new QTableWidgetItem(vehicle[0]));  // ID
+        vehicleTable->setItem(i, 1, new QTableWidgetItem(vehicle[3]));  // Category
+        vehicleTable->setItem(i, 2, new QTableWidgetItem(vehicle[1]));  // Brand
+        vehicleTable->setItem(i, 3, new QTableWidgetItem(vehicle[2]));  // Model
+        vehicleTable->setItem(i, 4, new QTableWidgetItem(QString("$%1").arg(vehicle[4].toDouble(), 0, 'f', 2)));  // Rate
+        vehicleTable->setItem(i, 5, new QTableWidgetItem(vehicle[5]));  // Status
     }
 }

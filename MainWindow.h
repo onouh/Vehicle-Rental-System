@@ -20,6 +20,8 @@ private:
     QStackedWidget* stackedWidget;
     QTableWidget* vehicleTable;
     QTableWidget* customerTable;
+    QTableWidget* reservationTable;
+    QTableWidget* dbVehicleTable;  // For database-driven vehicle view
     
     // Search widgets
     QLineEdit* searchInput;
@@ -47,7 +49,9 @@ private:
     void createAddVehicleForm();
     void createRentReturnForm();
     void createCustomerManagementView();
+    void createReservationView();
     void refreshVehicleTable();
+    void refreshVehicleTableFromDB();
     void populateTable(const std::vector<Vehicle*>& vehicles);
     void refreshCustomerTable();
 
@@ -56,6 +60,7 @@ private slots:
     void showAddVehicleForm();
     void showRentReturnForm();
     void showCustomerManagement();
+    void showReservations();
     void addVehicle();
     void removeSelectedVehicle();
     void rentSelectedVehicle();
