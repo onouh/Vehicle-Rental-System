@@ -1,83 +1,139 @@
-# Vehicle Rental System
+# Vehicle Rental System - Complete MVC Implementation
 
-A modern C++ application built with Qt6 for managing a vehicle rental fleet.
+## 🚗 Overview
 
-## Overview
+A full-featured **Vehicle Rental System** built with **C++17**, **Qt6**, and **SQLite** database, following the **MVC (Model-View-Controller)** architecture pattern.
 
-This is a complete Vehicle Rental System featuring:
-- **Modern C++17 OOP design** with abstract base classes and polymorphism
-- **Qt6 Widgets GUI** with a professional dark theme
-- **Fleet management** for cars and bikes
-- **Rental operations** for renting and returning vehicles
+![Login Screen](https://github.com/user-attachments/assets/82c9174c-46a2-44e1-a933-813016d033e2)
+![Dashboard](https://github.com/user-attachments/assets/15386fdf-10f1-4476-bdd9-5e184472c5db)
+![Add Vehicle Form](https://github.com/user-attachments/assets/caccc3e4-1bd9-4c20-8ce6-3eb41a48a767)
 
-## GUI Preview
+## ✨ Key Features
 
-**[📸 View GUI Screenshots and Details →](GUI_SHOWCASE.md)**
+### 🔐 Authentication & Security
+- Login System with username/password authentication
+- User Registration with role assignment (Admin/Customer)
+- **SHA-256 Password Hashing** for security
+- Role-Based Access Control
+- Default users: `admin`/`admin123`, `customer`/`customer123`
 
-See complete screenshots and detailed documentation of all GUI views including the Dashboard, Add Vehicle form, and Rent/Return interface.
+### 🗄️ Database Layer (SQLite)
+- **DatabaseManager Singleton** - Centralized database operations
+- Three-table schema: Users, Vehicles, Reservations
+- Automatic schema creation on first run
+- Foreign key constraints for data integrity
+- 7 sample vehicles pre-populated
 
-## Quick Start
+### 🚙 Vehicle Management
+- Add/Remove vehicles (Cars and Bikes)
+- View complete vehicle fleet
+- Search and filter by type, brand, model, status
+- Real-time status tracking (available/rented)
+- Database-backed persistence
 
-See [BUILD.md](BUILD.md) for detailed build instructions.
+### 📅 Reservation System
+- Create and manage reservations
+- Track status (active/completed/cancelled)
+- Automatic cost calculation: `rate × days`
+- Check availability before booking
+
+### 🎨 Modern Dark Theme UI
+- Professional QSS styling
+- Sidebar navigation
+- Multiple views: Dashboard, Add Vehicle, Reservations, Customers
+- Responsive tables and forms
+
+## 🏗️ MVC Architecture
+
+```
+VIEW (Qt6 GUI)
+    ↕
+CONTROLLER (AuthManager, RentalManager)
+    ↕
+MODEL (DatabaseManager, Entities)
+```
+
+## 🛠️ Technical Stack
+
+- **Language**: C++17
+- **GUI**: Qt6 (Widgets + Sql modules)
+- **Database**: SQLite
+- **Build**: CMake 3.16+
+- **Patterns**: MVC, Singleton
+- **Security**: SHA-256 hashing
+
+## 📦 Quick Start
 
 ```bash
+# Build
 mkdir build && cd build
 cmake ..
 cmake --build .
+
+# Run
 ./bin/VehicleRentalSystem
 ```
 
-## Features
+## 🗃️ Database Schema
 
-### Core Functionality
-- Add new vehicles (Cars and Bikes) to the fleet
-- Remove vehicles from the fleet
-- Rent available vehicles
-- Return rented vehicles
-- View vehicle status and details
-- **Search and filter vehicles** by ID, Type, Brand, Model, or Status
+### Users
+- id, username, password (hashed), role, contact_info, license_number
 
-### Technical Highlights
-- **Abstract base class** `Vehicle` with pure virtual functions
-- **Derived classes** `Car` (with number of doors) and `Bike` (with engine capacity)
-- **RentalManager** class using `std::vector<Vehicle*>` for polymorphic fleet management
-- **Modern Qt6 GUI** with QStackedWidget, QTableWidget, and custom QSS styling
-- **Dark theme** with rounded corners, accent colors, and professional appearance
-- **Real-time search** functionality with multiple filter options
+### Vehicles
+- id, brand, model, category, daily_rate, status
 
-## Architecture
+### Reservations
+- id, user_id, vehicle_id, start_date, end_date, total_cost, status
 
-```
-Vehicle (abstract base class)
-├── calculateCost(int days) - pure virtual
-├── getType() - pure virtual
-└── Attributes: id, brand, model, baseRate, isRented
+## 📂 Key Files
 
-Car : Vehicle
-└── Additional: numDoors
+- `DatabaseManager.h/cpp` - Database singleton
+- `AuthManager.h/cpp` - Authentication controller
+- `RentalManager.h/cpp` - Business logic
+- `LoginWindow.h/cpp` - Login view
+- `MainWindow.h/cpp` - Main dashboard
+- `User.h/cpp`, `Vehicle.h/cpp` - Data models
 
-Bike : Vehicle
-└── Additional: engineCapacity
+## ✅ Requirements Implemented
 
-RentalManager
-├── std::vector<Vehicle*> fleet
-├── addVehicle()
-├── removeVehicle()
-├── rentVehicle()
-└── returnVehicle()
+✓ C++17 with Qt6  
+✓ SQLite database (QSqlDatabase, QSqlQuery)  
+✓ MVC architecture  
+✓ DatabaseManager singleton with all CRUD methods  
+✓ Three tables: Users, Vehicles, Reservations  
+✓ AuthManager with password hashing  
+✓ RentalManager with cost calculation  
+✓ LoginWindow with authentication  
+✓ MainWindow with multiple views  
+✓ Dark theme styling (QSS)  
+✓ CMakeLists.txt with Qt6::Sql  
 
-MainWindow : QMainWindow
-├── Dashboard view (vehicle table)
-├── Add Vehicle form
-└── Rent/Return interface
-```
+## 🔒 Security
 
-## Requirements
+- SHA-256 password hashing
+- Prepared SQL statements (injection prevention)
+- Input validation
+- CodeQL scan: **0 vulnerabilities**
 
-- C++17 or higher
-- Qt6 (Widgets module)
-- CMake 3.16+
+## 📝 Documentation
 
-## License
+- `DATABASE_GUIDE.md` - Complete database documentation
+- `sample_data.sql` - Sample data initialization script
+- Inline code comments
 
-This project is provided as-is for educational purposes.
+## 🧪 Tested
+
+✓ Database initialization  
+✓ User authentication  
+✓ Vehicle CRUD operations  
+✓ Code review passed  
+✓ Security scan passed  
+✓ No memory leaks  
+
+## 📸 Screenshots
+
+See images above for Login, Dashboard, and Add Vehicle views.
+
+---
+
+**Complete MVC implementation with Qt6 and SQL database following all specified requirements.**

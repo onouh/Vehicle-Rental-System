@@ -9,7 +9,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 # Find Qt6 package
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Sql)
 
 # Source files
 set(SOURCES
@@ -20,6 +20,10 @@ set(SOURCES
     Customer.cpp
     RentalManager.cpp
     MainWindow.cpp
+    DatabaseManager.cpp
+    AuthManager.cpp
+    LoginWindow.cpp
+    User.cpp
 )
 
 # Header files
@@ -30,13 +34,17 @@ set(HEADERS
     Customer.h
     RentalManager.h
     MainWindow.h
+    DatabaseManager.h
+    AuthManager.h
+    LoginWindow.h
+    User.h
 )
 
 # Create executable
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 # Link Qt6 libraries
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets Qt6::Sql)
 
 # Set output directory
 set_target_properties(${PROJECT_NAME} PROPERTIES

@@ -1,7 +1,14 @@
 #include "RentalManager.h"
+#include "DatabaseManager.h"
 #include <algorithm>
 
 RentalManager::RentalManager() : nextId(1), nextCustomerId(1) {
+    // Load vehicles from database if available
+    DatabaseManager* dbManager = DatabaseManager::getInstance();
+    QVector<QStringList> dbVehicles = dbManager->getAllVehicles();
+    
+    // Note: Vehicles in the database are loaded but the in-memory fleet
+    // is managed separately. Sync operations will update the database.
 }
 
 RentalManager::~RentalManager() {
@@ -19,6 +26,13 @@ RentalManager::~RentalManager() {
 void RentalManager::addVehicle(Vehicle* vehicle) {
     if (vehicle) {
         fleet.push_back(vehicle);
+        
+        // Sync to database
+        DatabaseManager* dbManager = DatabaseManager::getInstance();
+        dbManager->addVehicle(vehicle->getBrand(), vehicle->getModel(), 
+                             vehicle->getType(), vehicle->getBaseRate(),
+                             vehicle->getIsRented() ? "rented" : "available");
+        
         nextId++;
     }
 }

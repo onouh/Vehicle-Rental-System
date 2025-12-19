@@ -9,17 +9,21 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include "RentalManager.h"
+#include "User.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
 private:
     RentalManager* rentalManager;
+    User* currentUser;  // Current logged-in user
     
     // Main widgets
     QStackedWidget* stackedWidget;
     QTableWidget* vehicleTable;
     QTableWidget* customerTable;
+    QTableWidget* reservationTable;
+    QTableWidget* dbVehicleTable;  // For database-driven vehicle view
     
     // Search widgets
     QLineEdit* searchInput;
@@ -47,7 +51,9 @@ private:
     void createAddVehicleForm();
     void createRentReturnForm();
     void createCustomerManagementView();
+    void createReservationView();
     void refreshVehicleTable();
+    void refreshVehicleTableFromDB();
     void populateTable(const std::vector<Vehicle*>& vehicles);
     void refreshCustomerTable();
 
@@ -56,6 +62,7 @@ private slots:
     void showAddVehicleForm();
     void showRentReturnForm();
     void showCustomerManagement();
+    void showReservations();
     void addVehicle();
     void removeSelectedVehicle();
     void rentSelectedVehicle();
@@ -66,7 +73,7 @@ private slots:
     void onSearchTextChanged();
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(User* user = nullptr, QWidget *parent = nullptr);
     ~MainWindow();
 };
 

@@ -6,6 +6,10 @@ CMakeCache.txt
 cmake_install.cmake
 Makefile
 
+# Database files
+*.db
+*.db-journal
+
 # Qt generated files
 *.autosave
 *.qm
@@ -38,3 +42,5 @@ VehicleRentalSystem
 *.swp
 *.swo
 .DS_Store
+*.db
+_codeql_build_dir/
