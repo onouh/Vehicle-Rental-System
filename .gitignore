@@ -6,6 +6,10 @@ CMakeCache.txt
 cmake_install.cmake
 Makefile
 
+# Database files
+*.db
+*.db-journal
+
 # Qt generated files
 *.autosave
 *.qm
