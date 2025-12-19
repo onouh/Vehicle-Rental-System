@@ -26,7 +26,7 @@ public:
 private slots:
     void captureNext() {
         if (currentStep == 0) {
-            // Step 1: Capture Login Window
+            // Step 1: Capture Login Window (will be ~400x350 with window decorations)
             qDebug() << "Capturing Login Window...";
             loginWindow = new LoginWindow();
             loginWindow->show();
