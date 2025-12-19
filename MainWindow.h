@@ -41,6 +41,7 @@ private:
     void createAddVehicleForm();
     void createRentReturnForm();
     void refreshVehicleTable();
+    void populateTable(const std::vector<Vehicle*>& vehicles);
 
 private slots:
     void showDashboard();

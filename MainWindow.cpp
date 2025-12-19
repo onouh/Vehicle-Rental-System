@@ -477,10 +477,14 @@ void MainWindow::createRentReturnForm() {
 
 void MainWindow::refreshVehicleTable() {
     const auto& fleet = rentalManager->getFleet();
-    vehicleTable->setRowCount(fleet.size());
+    populateTable(fleet);
+}
+
+void MainWindow::populateTable(const std::vector<Vehicle*>& vehicles) {
+    vehicleTable->setRowCount(vehicles.size());
     
-    for (size_t i = 0; i < fleet.size(); ++i) {
-        Vehicle* v = fleet[i];
+    for (size_t i = 0; i < vehicles.size(); ++i) {
+        Vehicle* v = vehicles[i];
         vehicleTable->setItem(i, 0, new QTableWidgetItem(QString::number(v->getId())));
         vehicleTable->setItem(i, 1, new QTableWidgetItem(v->getType()));
         vehicleTable->setItem(i, 2, new QTableWidgetItem(v->getBrand()));
@@ -618,15 +622,5 @@ void MainWindow::onSearchTextChanged() {
     std::vector<Vehicle*> filteredVehicles = rentalManager->searchVehicles(searchTerm, filterType);
     
     // Update table with filtered results
-    vehicleTable->setRowCount(filteredVehicles.size());
-    
-    for (size_t i = 0; i < filteredVehicles.size(); ++i) {
-        Vehicle* v = filteredVehicles[i];
-        vehicleTable->setItem(i, 0, new QTableWidgetItem(QString::number(v->getId())));
-        vehicleTable->setItem(i, 1, new QTableWidgetItem(v->getType()));
-        vehicleTable->setItem(i, 2, new QTableWidgetItem(v->getBrand()));
-        vehicleTable->setItem(i, 3, new QTableWidgetItem(v->getModel()));
-        vehicleTable->setItem(i, 4, new QTableWidgetItem(QString("$%1").arg(v->getBaseRate(), 0, 'f', 2)));
-        vehicleTable->setItem(i, 5, new QTableWidgetItem(v->getIsRented() ? "Rented" : "Available"));
-    }
+    populateTable(filteredVehicles);
 }
