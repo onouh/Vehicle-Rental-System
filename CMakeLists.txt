@@ -17,6 +17,7 @@ set(SOURCES
     Vehicle.cpp
     Car.cpp
     Bike.cpp
+    Customer.cpp
     RentalManager.cpp
     MainWindow.cpp
 )
@@ -26,6 +27,7 @@ set(HEADERS
     Vehicle.h
     Car.h
     Bike.h
+    Customer.h
     RentalManager.h
     MainWindow.h
 )
