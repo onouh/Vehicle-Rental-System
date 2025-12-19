@@ -239,6 +239,29 @@ void MainWindow::createDashboard() {
     titleLabel->setObjectName("titleLabel");
     layout->addWidget(titleLabel);
     
+    // Search bar
+    QHBoxLayout* searchLayout = new QHBoxLayout();
+    searchLayout->setSpacing(10);
+    
+    QLabel* searchLabel = new QLabel("Search:");
+    searchInput = new QLineEdit();
+    searchInput->setPlaceholderText("Enter search term...");
+    searchInput->setMinimumWidth(300);
+    connect(searchInput, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
+    
+    searchFilterCombo = new QComboBox();
+    searchFilterCombo->addItems({"All", "ID", "Type", "Brand", "Model", "Status"});
+    searchFilterCombo->setMinimumWidth(120);
+    connect(searchFilterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &MainWindow::onSearchTextChanged);
+    
+    searchLayout->addWidget(searchLabel);
+    searchLayout->addWidget(searchInput);
+    searchLayout->addWidget(searchFilterCombo);
+    searchLayout->addStretch();
+    
+    layout->addLayout(searchLayout);
+    
     // Table
     vehicleTable = new QTableWidget();
     vehicleTable->setColumnCount(6);
@@ -417,7 +440,7 @@ void MainWindow::createRentReturnForm() {
                     break;
                 }
             }
-            refreshVehicleTable(); // Also refresh main dashboard
+            onSearchTextChanged(); // Preserve search state on dashboard
         } else {
             QMessageBox::warning(this, "Error", "This vehicle is already rented or not found.");
         }
@@ -444,7 +467,7 @@ void MainWindow::createRentReturnForm() {
                     break;
                 }
             }
-            refreshVehicleTable(); // Also refresh main dashboard
+            onSearchTextChanged(); // Preserve search state on dashboard
         } else {
             QMessageBox::warning(this, "Error", "This vehicle is not currently rented or not found.");
         }
@@ -461,10 +484,14 @@ void MainWindow::createRentReturnForm() {
 
 void MainWindow::refreshVehicleTable() {
     const auto& fleet = rentalManager->getFleet();
-    vehicleTable->setRowCount(fleet.size());
+    populateTable(fleet);
+}
+
+void MainWindow::populateTable(const std::vector<Vehicle*>& vehicles) {
+    vehicleTable->setRowCount(vehicles.size());
     
-    for (size_t i = 0; i < fleet.size(); ++i) {
-        Vehicle* v = fleet[i];
+    for (size_t i = 0; i < vehicles.size(); ++i) {
+        Vehicle* v = vehicles[i];
         vehicleTable->setItem(i, 0, new QTableWidgetItem(QString::number(v->getId())));
         vehicleTable->setItem(i, 1, new QTableWidgetItem(v->getType()));
         vehicleTable->setItem(i, 2, new QTableWidgetItem(v->getBrand()));
@@ -476,7 +503,7 @@ void MainWindow::refreshVehicleTable() {
 
 void MainWindow::showDashboard() {
     stackedWidget->setCurrentIndex(0);
-    refreshVehicleTable();
+    onSearchTextChanged(); // Refresh with current search state
 }
 
 void MainWindow::showAddVehicleForm() {
@@ -523,7 +550,7 @@ void MainWindow::addVehicle() {
     baseRateInput->clear();
     
     QMessageBox::information(this, "Success", "Vehicle added successfully!");
-    refreshVehicleTable();
+    onSearchTextChanged(); // Preserve search state
 }
 
 void MainWindow::removeSelectedVehicle() {
@@ -543,7 +570,7 @@ void MainWindow::removeSelectedVehicle() {
     if (reply == QMessageBox::Yes) {
         if (rentalManager->removeVehicle(vehicleId)) {
             QMessageBox::information(this, "Success", "Vehicle removed successfully!");
-            refreshVehicleTable();
+            onSearchTextChanged(); // Preserve search state
         } else {
             QMessageBox::warning(this, "Error", "Failed to remove vehicle.");
         }
@@ -561,7 +588,7 @@ void MainWindow::rentSelectedVehicle() {
     
     if (rentalManager->rentVehicle(vehicleId)) {
         QMessageBox::information(this, "Success", "Vehicle rented successfully!");
-        refreshVehicleTable();
+        onSearchTextChanged(); // Preserve search state
     } else {
         QMessageBox::warning(this, "Error", "This vehicle is already rented or not found.");
     }
@@ -578,7 +605,7 @@ void MainWindow::returnSelectedVehicle() {
     
     if (rentalManager->returnVehicle(vehicleId)) {
         QMessageBox::information(this, "Success", "Vehicle returned successfully!");
-        refreshVehicleTable();
+        onSearchTextChanged(); // Preserve search state
     } else {
         QMessageBox::warning(this, "Error", "This vehicle is not currently rented or not found.");
     }
@@ -594,6 +621,15 @@ void MainWindow::onVehicleTypeChanged(int index) {
     }
 }
 
+void MainWindow::onSearchTextChanged() {
+    QString searchTerm = searchInput->text().trimmed();
+    QString filterType = searchFilterCombo->currentText();
+    
+    // Get filtered vehicles
+    std::vector<Vehicle*> filteredVehicles = rentalManager->searchVehicles(searchTerm, filterType);
+    
+    // Update table with filtered results
+    populateTable(filteredVehicles);
 void MainWindow::createCustomerManagementView() {
     QWidget* customerWidget = new QWidget();
     customerWidget->setObjectName("contentWidget");

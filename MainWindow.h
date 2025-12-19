@@ -21,6 +21,10 @@ private:
     QTableWidget* vehicleTable;
     QTableWidget* customerTable;
     
+    // Search widgets
+    QLineEdit* searchInput;
+    QComboBox* searchFilterCombo;
+    
     // Input widgets for adding vehicles
     QLineEdit* brandInput;
     QLineEdit* modelInput;
@@ -44,6 +48,7 @@ private:
     void createRentReturnForm();
     void createCustomerManagementView();
     void refreshVehicleTable();
+    void populateTable(const std::vector<Vehicle*>& vehicles);
     void refreshCustomerTable();
 
 private slots:
@@ -58,6 +63,7 @@ private slots:
     void addCustomer();
     void removeSelectedCustomer();
     void onVehicleTypeChanged(int index);
+    void onSearchTextChanged();
 
 public:
     MainWindow(QWidget *parent = nullptr);
