@@ -75,7 +75,7 @@ Vehicle-Rental-System/
   - Sidebar navigation with Dashboard, Add Vehicle, and Rent/Return views
   - QTableWidget for vehicle display
   - QFormLayout for input forms
-- **C++17 Standard**: Uses modern C++ features including std::vector and smart pointers
+- **C++17 Standard**: Uses modern C++ features including std::vector and polymorphism
 
 ## Troubleshooting
 

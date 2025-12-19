@@ -392,34 +392,54 @@ void MainWindow::createRentReturnForm() {
     QPushButton* rentBtn = new QPushButton("Rent Selected");
     connect(rentBtn, &QPushButton::clicked, [this, rentTable]() {
         int currentRow = rentTable->currentRow();
-        if (currentRow >= 0) {
-            int vehicleId = rentTable->item(currentRow, 0)->text().toInt();
-            rentSelectedVehicle();
-            // Refresh this table
+        if (currentRow < 0) {
+            QMessageBox::warning(this, "No Selection", "Please select a vehicle to rent.");
+            return;
+        }
+        
+        int vehicleId = rentTable->item(currentRow, 0)->text().toInt();
+        
+        if (rentalManager->rentVehicle(vehicleId)) {
+            QMessageBox::information(this, "Success", "Vehicle rented successfully!");
+            // Refresh the table
             const auto& fleet = rentalManager->getFleet();
             for (size_t i = 0; i < fleet.size(); ++i) {
                 Vehicle* v = fleet[i];
                 if (v->getId() == vehicleId) {
                     rentTable->setItem(i, 5, new QTableWidgetItem(v->getIsRented() ? "Rented" : "Available"));
+                    break;
                 }
             }
+            refreshVehicleTable(); // Also refresh main dashboard
+        } else {
+            QMessageBox::warning(this, "Error", "This vehicle is already rented or not found.");
         }
     });
     
     QPushButton* returnBtn = new QPushButton("Return Selected");
     connect(returnBtn, &QPushButton::clicked, [this, rentTable]() {
         int currentRow = rentTable->currentRow();
-        if (currentRow >= 0) {
-            int vehicleId = rentTable->item(currentRow, 0)->text().toInt();
-            returnSelectedVehicle();
-            // Refresh this table
+        if (currentRow < 0) {
+            QMessageBox::warning(this, "No Selection", "Please select a vehicle to return.");
+            return;
+        }
+        
+        int vehicleId = rentTable->item(currentRow, 0)->text().toInt();
+        
+        if (rentalManager->returnVehicle(vehicleId)) {
+            QMessageBox::information(this, "Success", "Vehicle returned successfully!");
+            // Refresh the table
             const auto& fleet = rentalManager->getFleet();
             for (size_t i = 0; i < fleet.size(); ++i) {
                 Vehicle* v = fleet[i];
                 if (v->getId() == vehicleId) {
                     rentTable->setItem(i, 5, new QTableWidgetItem(v->getIsRented() ? "Rented" : "Available"));
+                    break;
                 }
             }
+            refreshVehicleTable(); // Also refresh main dashboard
+        } else {
+            QMessageBox::warning(this, "Error", "This vehicle is not currently rented or not found.");
         }
     });
     
