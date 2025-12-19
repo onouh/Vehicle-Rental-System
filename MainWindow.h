@@ -9,12 +9,14 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include "RentalManager.h"
+#include "User.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
 private:
     RentalManager* rentalManager;
+    User* currentUser;  // Current logged-in user
     
     // Main widgets
     QStackedWidget* stackedWidget;
@@ -71,7 +73,7 @@ private slots:
     void onSearchTextChanged();
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(User* user = nullptr, QWidget *parent = nullptr);
     ~MainWindow();
 };
 

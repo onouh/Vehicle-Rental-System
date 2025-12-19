@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     
     // Connect login successful signal to show main window
     QObject::connect(loginWindow, &LoginWindow::loginSuccessful, [&](User* user) {
-        MainWindow* mainWindow = new MainWindow();
+        MainWindow* mainWindow = new MainWindow(user);  // Pass user to MainWindow
         mainWindow->show();
         
         // Clean up login window

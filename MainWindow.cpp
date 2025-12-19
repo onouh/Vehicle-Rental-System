@@ -3,6 +3,7 @@
 #include "Bike.h"
 #include "Customer.h"
 #include "DatabaseManager.h"
+#include "User.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QFormLayout>
@@ -11,10 +12,17 @@
 #include <QHeaderView>
 #include <QWidget>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), rentalManager(new RentalManager()) {
+MainWindow::MainWindow(User* user, QWidget *parent)
+    : QMainWindow(parent), rentalManager(new RentalManager()), currentUser(user) {
     setupUI();
     applyStyles();
+    
+    // Set window title with user info
+    if (currentUser) {
+        setWindowTitle(QString("Vehicle Rental System - %1 (%2)")
+                      .arg(currentUser->getUsername())
+                      .arg(currentUser->getRole()));
+    }
     
     // Note: Sample vehicles are now managed via database
     // Uncomment below to add vehicles to in-memory fleet for legacy compatibility
@@ -833,14 +841,17 @@ void MainWindow::refreshVehicleTableFromDB() {
     DatabaseManager* dbManager = DatabaseManager::getInstance();
     QVector<QStringList> dbVehicles = dbManager->getAllVehicles();
     
+    // Database column indices for clarity
+    enum VehicleColumns { DB_ID = 0, DB_BRAND = 1, DB_MODEL = 2, DB_CATEGORY = 3, DB_RATE = 4, DB_STATUS = 5 };
+    
     vehicleTable->setRowCount(dbVehicles.size());
     for (int i = 0; i < dbVehicles.size(); ++i) {
         const QStringList& vehicle = dbVehicles[i];
-        vehicleTable->setItem(i, 0, new QTableWidgetItem(vehicle[0]));  // ID
-        vehicleTable->setItem(i, 1, new QTableWidgetItem(vehicle[3]));  // Category
-        vehicleTable->setItem(i, 2, new QTableWidgetItem(vehicle[1]));  // Brand
-        vehicleTable->setItem(i, 3, new QTableWidgetItem(vehicle[2]));  // Model
-        vehicleTable->setItem(i, 4, new QTableWidgetItem(QString("$%1").arg(vehicle[4].toDouble(), 0, 'f', 2)));  // Rate
-        vehicleTable->setItem(i, 5, new QTableWidgetItem(vehicle[5]));  // Status
+        vehicleTable->setItem(i, 0, new QTableWidgetItem(vehicle[DB_ID]));
+        vehicleTable->setItem(i, 1, new QTableWidgetItem(vehicle[DB_CATEGORY]));
+        vehicleTable->setItem(i, 2, new QTableWidgetItem(vehicle[DB_BRAND]));
+        vehicleTable->setItem(i, 3, new QTableWidgetItem(vehicle[DB_MODEL]));
+        vehicleTable->setItem(i, 4, new QTableWidgetItem(QString("$%1").arg(vehicle[DB_RATE].toDouble(), 0, 'f', 2)));
+        vehicleTable->setItem(i, 5, new QTableWidgetItem(vehicle[DB_STATUS]));
     }
 }

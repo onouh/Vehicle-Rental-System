@@ -24,6 +24,9 @@ bool AuthManager::login(const QString& username, const QString& password) {
         if (currentUser != nullptr) {
             qDebug() << "User logged in successfully:" << username;
             return true;
+        } else {
+            qDebug() << "Authentication succeeded but failed to retrieve user data";
+            return false;
         }
     }
     
