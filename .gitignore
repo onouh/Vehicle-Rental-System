@@ -42,3 +42,5 @@ VehicleRentalSystem
 *.swp
 *.swo
 .DS_Store
+*.db
+_codeql_build_dir/
