@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Rental System - GUI Screenshots</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #7c5cde;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .screenshot-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .screenshot-container h2 {
+            color: #333;
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .screenshot-container p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .screenshot-container img {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .features {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+        .features ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .features li {
+            margin: 5px 0;
+            color: #555;
+        }
+        .info-box {
+            background: #e8f4fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚗 Vehicle Rental System - GUI Screenshots</h1>
+    <p class="subtitle">Complete visual guide to all GUI windows</p>
+
+    <div class="info-box">
+        <strong>📸 About these screenshots:</strong> All screenshots were automatically captured using a custom Qt C++ tool with xvfb (virtual display). 
+        They showcase the complete application interface with its modern dark theme and purple accent colors.
+    </div>
+
+    <div class="screenshot-container">
+        <h2>1. Login Window</h2>
+        <p><strong>Size:</strong> 400x350 pixels | <strong>File:</strong> 01_login_window.png</p>
+        <p>The initial login screen where users authenticate to access the system. Features a clean, modern design with username/password fields.</p>
+        <div class="features">
+            <strong>Key Features:</strong>
+            <ul>
+                <li>Username input field with placeholder text</li>
+                <li>Password input field with masking</li>
+                <li>Login button (purple accent)</li>
+                <li>Register button for new users</li>
+                <li>Dark theme with professional styling</li>
+                <li>Default accounts: admin/admin123, customer/customer123</li>
+            </ul>
+        </div>
+        <img src="01_login_window.png" alt="Login Window">
+    </div>
+
+    <div class="screenshot-container">
+        <h2>2. Main Dashboard - Vehicle Fleet</h2>
+        <p><strong>Size:</strong> 1200x700 pixels | <strong>File:</strong> 02_main_dashboard.png</p>
+        <p>The main dashboard displays the complete vehicle fleet in a searchable, sortable table with sidebar navigation.</p>
+        <div class="features">
+            <strong>Key Features:</strong>
+            <ul>
+                <li>Sidebar navigation with 5 menu options</li>
+                <li>Vehicle table showing: ID, Type, Brand, Model, Rate/Day, Status</li>
+                <li>Search bar with filter dropdown (All/Type/Brand/Model/Status)</li>
+                <li>Refresh button to reload vehicle data</li>
+                <li>Remove Selected button to delete vehicles</li>
+                <li>Database-driven vehicle display</li>
+            </ul>
+        </div>
+        <img src="02_main_dashboard.png" alt="Main Dashboard">
+    </div>
+
+    <div class="screenshot-container">
+        <h2>3. Add Vehicle Form</h2>
+        <p><strong>Size:</strong> 1200x700 pixels | <strong>File:</strong> 03_add_vehicle_form.png</p>
+        <p>Form for adding new vehicles (Cars or Bikes) to the fleet with type-specific fields.</p>
+        <div class="features">
+            <strong>Key Features:</strong>
+            <ul>
+                <li>Vehicle Type dropdown (Car/Bike selection)</li>
+                <li>Number of Doors input (visible for Cars only)</li>
+                <li>Brand name input field</li>
+                <li>Model name input field</li>
+                <li>Base Rate ($/day) input field</li>
+                <li>Add Vehicle button to save to database</li>
+                <li>Dynamic form that changes based on vehicle type</li>
+            </ul>
+        </div>
+        <img src="03_add_vehicle_form.png" alt="Add Vehicle Form">
+    </div>
+
+    <div class="screenshot-container">
+        <h2>4. Rent/Return Interface</h2>
+        <p><strong>Size:</strong> 1200x700 pixels | <strong>File:</strong> 04_rent_return_interface.png</p>
+        <p>Interface for managing vehicle rentals and returns with clear action buttons.</p>
+        <div class="features">
+            <strong>Key Features:</strong>
+            <ul>
+                <li>Vehicle selection table with full details</li>
+                <li>Status column showing availability</li>
+                <li>Rent Selected button (purple) to rent a vehicle</li>
+                <li>Return Selected button (purple) to return a rented vehicle</li>
+                <li>Instructions: "Select a vehicle from the table below and choose an action"</li>
+                <li>Automatic status updates in database</li>
+            </ul>
+        </div>
+        <img src="04_rent_return_interface.png" alt="Rent/Return Interface">
+    </div>
+
+    <div class="screenshot-container">
+        <h2>5. Customer Management</h2>
+        <p><strong>Size:</strong> 1200x700 pixels | <strong>File:</strong> 05_customer_management.png</p>
+        <p>Complete customer management system with add/remove functionality.</p>
+        <div class="features">
+            <strong>Key Features:</strong>
+            <ul>
+                <li>Add New Customer form section</li>
+                <li>Name, Email, and Phone input fields</li>
+                <li>Add Customer button to save new customers</li>
+                <li>Customer List table showing: ID, Name, Email, Phone</li>
+                <li>Remove Selected button (red) to delete customers</li>
+                <li>Database integration for persistent storage</li>
+            </ul>
+        </div>
+        <img src="05_customer_management.png" alt="Customer Management">
+    </div>
+
+    <div class="screenshot-container">
+        <h2>6. Reservations View</h2>
+        <p><strong>Size:</strong> 1200x700 pixels | <strong>File:</strong> 06_reservations_view.png</p>
+        <p>View for tracking all vehicle reservations including active and completed rentals.</p>
+        <div class="features">
+            <strong>Key Features:</strong>
+            <ul>
+                <li>Reservations table structure</li>
+                <li>Tracks rental history</li>
+                <li>Shows active rentals</li>
+                <li>Database-backed reservation system</li>
+                <li>Integration with Users and Vehicles tables</li>
+            </ul>
+        </div>
+        <img src="06_reservations_view.png" alt="Reservations View">
+    </div>
+
+    <div class="info-box">
+        <strong>🔧 Technical Details:</strong>
+        <ul style="margin: 10px 0; padding-left: 20px;">
+            <li><strong>Framework:</strong> Qt6 with C++17</li>
+            <li><strong>Database:</strong> SQLite with Qt SQL module</li>
+            <li><strong>Theme:</strong> Custom dark theme with QSS styling</li>
+            <li><strong>Capture Method:</strong> Qt's QWidget::grab() with xvfb virtual display</li>
+            <li><strong>Resolution:</strong> 1920x1080x24 virtual screen</li>
+            <li><strong>Format:</strong> PNG (8-bit/color RGB, non-interlaced)</li>
+        </ul>
+    </div>
+</body>
+</html>
