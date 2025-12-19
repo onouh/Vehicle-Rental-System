@@ -19,6 +19,7 @@ private:
     // Main widgets
     QStackedWidget* stackedWidget;
     QTableWidget* vehicleTable;
+    QTableWidget* customerTable;
     
     // Search widgets
     QLineEdit* searchInput;
@@ -34,23 +35,33 @@ private:
     QWidget* numDoorsWidget;
     QWidget* engineCapacityWidget;
     
+    // Input widgets for adding customers
+    QLineEdit* customerNameInput;
+    QLineEdit* customerEmailInput;
+    QLineEdit* customerPhoneInput;
+    
     // Methods
     void setupUI();
     void applyStyles();
     void createDashboard();
     void createAddVehicleForm();
     void createRentReturnForm();
+    void createCustomerManagementView();
     void refreshVehicleTable();
     void populateTable(const std::vector<Vehicle*>& vehicles);
+    void refreshCustomerTable();
 
 private slots:
     void showDashboard();
     void showAddVehicleForm();
     void showRentReturnForm();
+    void showCustomerManagement();
     void addVehicle();
     void removeSelectedVehicle();
     void rentSelectedVehicle();
     void returnSelectedVehicle();
+    void addCustomer();
+    void removeSelectedCustomer();
     void onVehicleTypeChanged(int index);
     void onSearchTextChanged();
 

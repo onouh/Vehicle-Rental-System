@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "Car.h"
 #include "Bike.h"
+#include "Customer.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QFormLayout>
@@ -61,9 +62,14 @@ void MainWindow::setupUI() {
     rentReturnBtn->setObjectName("sidebarButton");
     connect(rentReturnBtn, &QPushButton::clicked, this, &MainWindow::showRentReturnForm);
     
+    QPushButton* customersBtn = new QPushButton("Manage Customers");
+    customersBtn->setObjectName("sidebarButton");
+    connect(customersBtn, &QPushButton::clicked, this, &MainWindow::showCustomerManagement);
+    
     sidebarLayout->addWidget(dashboardBtn);
     sidebarLayout->addWidget(addVehicleBtn);
     sidebarLayout->addWidget(rentReturnBtn);
+    sidebarLayout->addWidget(customersBtn);
     sidebarLayout->addStretch();
     
     // Stacked widget for content
@@ -72,6 +78,7 @@ void MainWindow::setupUI() {
     createDashboard();
     createAddVehicleForm();
     createRentReturnForm();
+    createCustomerManagementView();
     
     // Add widgets to main layout
     mainLayout->addWidget(sidebar);
@@ -623,4 +630,137 @@ void MainWindow::onSearchTextChanged() {
     
     // Update table with filtered results
     populateTable(filteredVehicles);
+void MainWindow::createCustomerManagementView() {
+    QWidget* customerWidget = new QWidget();
+    customerWidget->setObjectName("contentWidget");
+    QVBoxLayout* layout = new QVBoxLayout(customerWidget);
+    layout->setContentsMargins(30, 30, 30, 30);
+    layout->setSpacing(20);
+    
+    // Title
+    QLabel* titleLabel = new QLabel("Customer Management");
+    titleLabel->setObjectName("titleLabel");
+    layout->addWidget(titleLabel);
+    
+    // Add customer form
+    QLabel* formTitle = new QLabel("Add New Customer");
+    formTitle->setStyleSheet("font-size: 16px; font-weight: bold; margin-top: 10px;");
+    layout->addWidget(formTitle);
+    
+    QFormLayout* formLayout = new QFormLayout();
+    formLayout->setSpacing(15);
+    formLayout->setLabelAlignment(Qt::AlignRight);
+    
+    customerNameInput = new QLineEdit();
+    customerNameInput->setPlaceholderText("Enter customer name");
+    formLayout->addRow("Name:", customerNameInput);
+    
+    customerEmailInput = new QLineEdit();
+    customerEmailInput->setPlaceholderText("Enter email address");
+    formLayout->addRow("Email:", customerEmailInput);
+    
+    customerPhoneInput = new QLineEdit();
+    customerPhoneInput->setPlaceholderText("Enter phone number");
+    formLayout->addRow("Phone:", customerPhoneInput);
+    
+    layout->addLayout(formLayout);
+    
+    // Add button
+    QHBoxLayout* addButtonLayout = new QHBoxLayout();
+    QPushButton* addCustomerBtn = new QPushButton("Add Customer");
+    connect(addCustomerBtn, &QPushButton::clicked, this, &MainWindow::addCustomer);
+    addButtonLayout->addWidget(addCustomerBtn);
+    addButtonLayout->addStretch();
+    layout->addLayout(addButtonLayout);
+    
+    // Customer list table
+    QLabel* listTitle = new QLabel("Customer List");
+    listTitle->setStyleSheet("font-size: 16px; font-weight: bold; margin-top: 20px;");
+    layout->addWidget(listTitle);
+    
+    customerTable = new QTableWidget();
+    customerTable->setColumnCount(4);
+    customerTable->setHorizontalHeaderLabels({"ID", "Name", "Email", "Phone"});
+    customerTable->horizontalHeader()->setStretchLastSection(true);
+    customerTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    customerTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    customerTable->setSelectionMode(QAbstractItemView::SingleSelection);
+    customerTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    layout->addWidget(customerTable);
+    
+    // Remove button
+    QHBoxLayout* removeButtonLayout = new QHBoxLayout();
+    QPushButton* removeCustomerBtn = new QPushButton("Remove Selected");
+    removeCustomerBtn->setObjectName("removeButton");
+    connect(removeCustomerBtn, &QPushButton::clicked, this, &MainWindow::removeSelectedCustomer);
+    removeButtonLayout->addWidget(removeCustomerBtn);
+    removeButtonLayout->addStretch();
+    layout->addLayout(removeButtonLayout);
+    
+    stackedWidget->addWidget(customerWidget);
+}
+
+void MainWindow::showCustomerManagement() {
+    stackedWidget->setCurrentIndex(3);
+    refreshCustomerTable();
+}
+
+void MainWindow::addCustomer() {
+    QString name = customerNameInput->text().trimmed();
+    QString email = customerEmailInput->text().trimmed();
+    QString phone = customerPhoneInput->text().trimmed();
+    
+    if (name.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+        QMessageBox::warning(this, "Invalid Input", "Please fill in all customer fields.");
+        return;
+    }
+    
+    int id = rentalManager->getNextCustomerId();
+    Customer* customer = new Customer(id, name, email, phone);
+    rentalManager->addCustomer(customer);
+    
+    // Clear inputs
+    customerNameInput->clear();
+    customerEmailInput->clear();
+    customerPhoneInput->clear();
+    
+    QMessageBox::information(this, "Success", "Customer added successfully!");
+    refreshCustomerTable();
+}
+
+void MainWindow::removeSelectedCustomer() {
+    int currentRow = customerTable->currentRow();
+    if (currentRow < 0) {
+        QMessageBox::warning(this, "No Selection", "Please select a customer to remove.");
+        return;
+    }
+    
+    int customerId = customerTable->item(currentRow, 0)->text().toInt();
+    
+    QMessageBox::StandardButton reply = QMessageBox::question(
+        this, "Confirm Removal", 
+        "Are you sure you want to remove this customer?",
+        QMessageBox::Yes | QMessageBox::No);
+    
+    if (reply == QMessageBox::Yes) {
+        if (rentalManager->removeCustomer(customerId)) {
+            QMessageBox::information(this, "Success", "Customer removed successfully!");
+            refreshCustomerTable();
+        } else {
+            QMessageBox::warning(this, "Error", "Failed to remove customer.");
+        }
+    }
+}
+
+void MainWindow::refreshCustomerTable() {
+    const auto& customers = rentalManager->getCustomers();
+    customerTable->setRowCount(customers.size());
+    
+    for (size_t i = 0; i < customers.size(); ++i) {
+        Customer* c = customers[i];
+        customerTable->setItem(i, 0, new QTableWidgetItem(QString::number(c->getId())));
+        customerTable->setItem(i, 1, new QTableWidgetItem(c->getName()));
+        customerTable->setItem(i, 2, new QTableWidgetItem(c->getEmail()));
+        customerTable->setItem(i, 3, new QTableWidgetItem(c->getPhone()));
+    }
 }
