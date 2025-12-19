@@ -1,7 +1,7 @@
 #include "RentalManager.h"
 #include <algorithm>
 
-RentalManager::RentalManager() : nextId(1) {
+RentalManager::RentalManager() : nextId(1), nextCustomerId(1) {
 }
 
 RentalManager::~RentalManager() {
@@ -9,6 +9,11 @@ RentalManager::~RentalManager() {
         delete vehicle;
     }
     fleet.clear();
+    
+    for (Customer* customer : customers) {
+        delete customer;
+    }
+    customers.clear();
 }
 
 void RentalManager::addVehicle(Vehicle* vehicle) {
@@ -53,4 +58,30 @@ bool RentalManager::returnVehicle(int id) {
         return true;
     }
     return false;
+}
+
+void RentalManager::addCustomer(Customer* customer) {
+    if (customer) {
+        customers.push_back(customer);
+        nextCustomerId++;
+    }
+}
+
+bool RentalManager::removeCustomer(int id) {
+    auto it = std::find_if(customers.begin(), customers.end(),
+                          [id](Customer* c) { return c->getId() == id; });
+    
+    if (it != customers.end()) {
+        delete *it;
+        customers.erase(it);
+        return true;
+    }
+    return false;
+}
+
+Customer* RentalManager::findCustomer(int id) {
+    auto it = std::find_if(customers.begin(), customers.end(),
+                          [id](Customer* c) { return c->getId() == id; });
+    
+    return (it != customers.end()) ? *it : nullptr;
 }
