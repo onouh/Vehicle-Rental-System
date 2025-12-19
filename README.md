@@ -117,7 +117,17 @@ cmake --build .
 
 ## 📝 Documentation
 
+### GUI Documentation
+- **`GUI_COMPLETE_REFERENCE.md`** - Your complete navigation guide to all GUI resources
+- **`COMPLETE_GUI_SHOWCASE.md`** - Full visual guide with ASCII diagrams of all windows
+- `GUI_SHOWCASE.md` - Original GUI overview with screenshots
+- `CUSTOMER_GUI.md` - Customer management feature details
+- `SEARCH_VISUAL_GUIDE.md` - Search feature examples and demos
+
+### Technical Documentation
 - `DATABASE_GUIDE.md` - Complete database documentation
+- `DESIGN.md` - Architecture and design decisions
+- `ARCHITECTURE.txt` - System architecture overview
 - `sample_data.sql` - Sample data initialization script
 - Inline code comments
 
@@ -130,9 +140,27 @@ cmake --build .
 ✓ Security scan passed  
 ✓ No memory leaks  
 
-## 📸 Screenshots
+## 📸 Screenshots & GUI Documentation
 
 See images above for Login, Dashboard, and Add Vehicle views.
+
+### 🎨 Complete GUI Reference
+
+**Want to see ALL GUI windows with detailed visual guides?**
+
+📖 **[GUI_COMPLETE_REFERENCE.md](GUI_COMPLETE_REFERENCE.md)** - Your comprehensive navigation guide to all GUI documentation
+
+📋 **[COMPLETE_GUI_SHOWCASE.md](COMPLETE_GUI_SHOWCASE.md)** - Complete ASCII art diagrams of all windows including:
+- Login Window (Admin & Customer)
+- Dashboard with Search & Filters
+- Add Vehicle Form (Cars & Bikes)
+- Rent/Return Interface
+- Customer Management
+- Reservations View
+- Complete User Workflows
+- Role Comparisons (Admin vs Customer)
+
+**All features documented with visual examples!**
 
 ---
 
