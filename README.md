@@ -10,6 +10,12 @@ This is a complete Vehicle Rental System featuring:
 - **Fleet management** for cars and bikes
 - **Rental operations** for renting and returning vehicles
 
+## GUI Preview
+
+**[📸 View GUI Screenshots and Details →](GUI_SHOWCASE.md)**
+
+See complete screenshots and detailed documentation of all GUI views including the Dashboard, Add Vehicle form, and Rent/Return interface.
+
 ## Quick Start
 
 See [BUILD.md](BUILD.md) for detailed build instructions.
