@@ -9,9 +9,10 @@
 | Resource | Description | Link |
 |----------|-------------|------|
 | **Complete GUI Showcase** | Full ASCII art diagrams of ALL windows | [COMPLETE_GUI_SHOWCASE.md](COMPLETE_GUI_SHOWCASE.md) |
+| **Admin GUI Screenshots** ⭐ | Complete Admin interface documentation | [ADMIN_GUI_SCREENSHOT.md](ADMIN_GUI_SCREENSHOT.md) |
+| **Customer GUI Screenshots** ⭐ | Complete Customer interface documentation | [CUSTOMER_GUI_SCREENSHOT.md](CUSTOMER_GUI_SCREENSHOT.md) |
 | **GUI Showcase (Original)** | Overview with screenshot references | [GUI_SHOWCASE.md](GUI_SHOWCASE.md) |
-| **Customer GUI Details** | Customer management documentation | [CUSTOMER_GUI.md](CUSTOMER_GUI.md) |
-| **Customer GUI Screenshot** | ASCII representation of customer view | [CUSTOMER_GUI_SCREENSHOT.md](CUSTOMER_GUI_SCREENSHOT.md) |
+| **Customer GUI Details** | Customer management feature docs | [CUSTOMER_GUI.md](CUSTOMER_GUI.md) |
 | **Search Visual Guide** | Search feature detailed documentation | [SEARCH_VISUAL_GUIDE.md](SEARCH_VISUAL_GUIDE.md) |
 | **Search Feature** | Search implementation details | [SEARCH_FEATURE.md](SEARCH_FEATURE.md) |
 
@@ -304,24 +305,32 @@ Reservations Table:
    - All windows and features
    - User workflows
    - Role comparisons
+
+2. **[ADMIN_GUI_SCREENSHOT.md](ADMIN_GUI_SCREENSHOT.md)** ⭐ **NEW**
+   - Complete Admin role interface
+   - All admin-accessible views
+   - Admin-specific features
+   - Full capabilities overview
    
-2. [GUI_SHOWCASE.md](GUI_SHOWCASE.md)
+3. **[CUSTOMER_GUI_SCREENSHOT.md](CUSTOMER_GUI_SCREENSHOT.md)** ⭐ **NEW**
+   - Complete Customer role interface
+   - Customer-accessible views
+   - Rental workflows
+   - Customer capabilities overview
+   
+4. [GUI_SHOWCASE.md](GUI_SHOWCASE.md)
    - Original GUI overview
    - Links to actual screenshots
    
-3. [CUSTOMER_GUI.md](CUSTOMER_GUI.md)
+5. [CUSTOMER_GUI.md](CUSTOMER_GUI.md)
    - Customer management feature
    - Technical implementation
    
-4. [CUSTOMER_GUI_SCREENSHOT.md](CUSTOMER_GUI_SCREENSHOT.md)
-   - ASCII art of customer view
-   - Interaction flows
-   
-5. [SEARCH_VISUAL_GUIDE.md](SEARCH_VISUAL_GUIDE.md)
+6. [SEARCH_VISUAL_GUIDE.md](SEARCH_VISUAL_GUIDE.md)
    - Search feature examples
    - Filter demonstrations
    
-6. [SEARCH_FEATURE.md](SEARCH_FEATURE.md)
+7. [SEARCH_FEATURE.md](SEARCH_FEATURE.md)
    - Search implementation details
 
 ### Technical Documentation

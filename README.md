@@ -150,6 +150,26 @@ See images above for Login, Dashboard, and Add Vehicle views.
 
 📖 **[GUI_COMPLETE_REFERENCE.md](GUI_COMPLETE_REFERENCE.md)** - Your comprehensive navigation guide to all GUI documentation
 
+### 👤 Role-Specific GUI Documentation
+
+📋 **[ADMIN_GUI_SCREENSHOT.md](ADMIN_GUI_SCREENSHOT.md)** - Complete Admin interface documentation:
+- Login Window for Admin
+- Dashboard with Full Fleet Management
+- Add Vehicle Form (Cars & Bikes)
+- Rent/Return Interface
+- Customer Management
+- Reservations View
+- All Admin Features & Capabilities
+
+👥 **[CUSTOMER_GUI_SCREENSHOT.md](CUSTOMER_GUI_SCREENSHOT.md)** - Complete Customer interface documentation:
+- Login Window for Customer
+- Dashboard for Browsing Vehicles
+- Add Your Own Vehicle
+- Rent/Return Interface
+- Customer Directory
+- Personal Reservations
+- Customer Workflow Examples
+
 📋 **[COMPLETE_GUI_SHOWCASE.md](COMPLETE_GUI_SHOWCASE.md)** - Complete ASCII art diagrams of all windows including:
 - Login Window (Admin & Customer)
 - Dashboard with Search & Filters
@@ -160,7 +180,7 @@ See images above for Login, Dashboard, and Add Vehicle views.
 - Complete User Workflows
 - Role Comparisons (Admin vs Customer)
 
-**All features documented with visual examples!**
+**All features documented with detailed visual examples!**
 
 ---
 

@@ -1,10 +1,10 @@
-# Customer GUI Screenshots - Vehicle Rental System
+# Admin GUI Screenshots - Vehicle Rental System
 
-This document provides detailed visual representations of the Customer user interface in the Vehicle Rental System.
+This document provides detailed visual representations of the Admin user interface in the Vehicle Rental System.
 
-## Login as Customer
+## Login as Admin
 
-**Credentials**: `customer` / `customer123`
+**Credentials**: `admin` / `admin123`
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -17,11 +17,11 @@ This document provides detailed visual representations of the Customer user inte
 │                                                               │
 │                                                               │
 │               Username: ┌────────────────────────┐           │
-│                        │ customer                │           │
+│                        │ admin                   │           │
 │                        └────────────────────────┘           │
 │                                                               │
 │               Password: ┌────────────────────────┐           │
-│                        │ ••••••••••••            │           │
+│                        │ ••••••••                │           │
 │                        └────────────────────────┘           │
 │                                                               │
 │                                                               │
@@ -35,13 +35,13 @@ This document provides detailed visual representations of the Customer user inte
 
 ---
 
-## Customer Main Window - Full Access
+## Admin Main Window - Full Access
 
-After logging in as customer, the user gets access to all rental features:
+After logging in as admin, the user gets **full access** to all features:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  Vehicle Rental System - customer (customer)                  ⊠ ▭ ✕      │
+│  Vehicle Rental System - admin (admin)                        ⊠ ▭ ✕      │
 ├──────────────────────────────────────────────────────────────────────────┤
 │                                                                            │
 │  ┌──────────┐  ┌─────────────────────────────────────────────────────┐  │
@@ -80,18 +80,18 @@ After logging in as customer, the user gets access to all rental features:
 
 ---
 
-## 1. Customer Dashboard View
+## 1. Admin Dashboard View
 
-Customers can browse the available vehicle fleet:
+The admin can view all vehicles in the fleet with full control:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
-│  Vehicle Rental System - customer (customer)                        ⊠ ▭ ✕       │
+│  Vehicle Rental System - admin (admin)                              ⊠ ▭ ✕       │
 ├──────────────────────────────────────────────────────────────────────────────────┤
 │ ┌──────────┐ ┌──────────────────────────────────────────────────────────────┐   │
-│ │[Dashboard│ │                                                                │   │
-│ │          │ │  Dashboard - Browse Available Vehicles                         │   │
-│ │ Add      │ │  ═════════════════════════════════                             │   │
+│ │Dashboard │ │                                                                │   │
+│ │          │ │  Dashboard - Vehicle Fleet Management                         │   │
+│ │ Add      │ │  ════════════════════════════════════════                     │   │
 │ │ Vehicle  │ │                                                                │   │
 │ │          │ │  Search: ┌──────────────┐  Filter: ┌─────────┐  ┌────────┐   │   │
 │ │ Rent/    │ │         │ Search...     │         │  All    ▼│  │ Search │   │   │
@@ -117,87 +117,83 @@ Customers can browse the available vehicle fleet:
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Customer Dashboard Features:**
-- ✅ Browse all available vehicles
-- ✅ Search vehicles by brand, model, or type
-- ✅ Filter by vehicle type (Car/Bike) or status
-- ✅ View pricing information
-- ✅ See real-time availability status
-- ✅ Refresh to see latest updates
-- ✅ Remove own vehicles (if applicable)
+**Admin Dashboard Features:**
+- ✅ View all vehicles in the fleet
+- ✅ Search and filter vehicles by type, brand, model, or status
+- ✅ Real-time status updates (Available/Rented)
+- ✅ Remove vehicles from the fleet
+- ✅ Refresh vehicle list from database
 
 ---
 
-## 2. Customer Add Vehicle Form
+## 2. Admin Add Vehicle Form
 
-Customers who own vehicles can add them to the rental platform:
+Admins can add new vehicles (Cars or Bikes) to the fleet:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
-│  Vehicle Rental System - customer (customer)                        ⊠ ▭ ✕       │
+│  Vehicle Rental System - admin (admin)                              ⊠ ▭ ✕       │
 ├──────────────────────────────────────────────────────────────────────────────────┤
 │ ┌──────────┐ ┌──────────────────────────────────────────────────────────────┐   │
 │ │Dashboard │ │                                                                │   │
-│ │          │ │  Add Your Vehicle                                              │   │
+│ │          │ │  Add Vehicle Form                                              │   │
 │ │[Add      │ │  ════════════════                                              │   │
 │ │ Vehicle] │ │                                                                │   │
 │ │          │ │                                                                │   │
 │ │ Rent/    │ │  Vehicle Type:  ┌────────────┐                                │   │
-│ │ Return   │ │                 │ Bike      ▼│                                │   │
+│ │ Return   │ │                 │ Car       ▼│                                │   │
 │ │          │ │                 └────────────┘                                │   │
 │ │ Manage   │ │                                                                │   │
 │ │Customers │ │  Brand:  ┌──────────────────────────┐                         │   │
-│ │          │ │          │ Harley-Davidson          │                         │   │
+│ │          │ │          │ e.g., Toyota, Honda      │                         │   │
 │ │Reserva-  │ │          └──────────────────────────┘                         │   │
 │ │ tions    │ │                                                                │   │
 │ └──────────┘ │  Model:  ┌──────────────────────────┐                         │   │
-│              │          │ Street 750               │                         │   │
+│              │          │ e.g., Camry, Civic       │                         │   │
 │              │          └──────────────────────────┘                         │   │
 │              │                                                                │   │
 │              │  Base Rate ($/day):  ┌──────────────┐                         │   │
-│              │                      │ 55.00        │                         │   │
+│              │                      │ 50.00        │                         │   │
 │              │                      └──────────────┘                         │   │
 │              │                                                                │   │
 │              │  ┌─────────────────────────────────────────┐                  │   │
-│              │  │ For Bikes:                              │                  │   │
-│              │  │  Engine Capacity (cc):  ┌──────┐       │                  │   │
-│              │  │                         │ 750  │       │                  │   │
-│              │  │                         └──────┘       │                  │   │
+│              │  │ For Cars:                               │                  │   │
+│              │  │  Number of Doors:  ┌──┐                │                  │   │
+│              │  │                    │4▼│                │                  │   │
+│              │  │                    └──┘                │                  │   │
 │              │  └─────────────────────────────────────────┘                  │   │
 │              │                                                                │   │
 │              │  ┌──────────────┐                                             │   │
 │              │  │ Add Vehicle  │                                             │   │
 │              │  └──────────────┘                                             │   │
 │              │                                                                │   │
-│              │  Your vehicle will be added to the rental fleet!              │   │
-│              │                                                                │   │
 │              └──────────────────────────────────────────────────────────────┘   │
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Customer Add Vehicle Features:**
-- ✅ Add personal vehicles to earn rental income
-- ✅ Choose between Car or Bike type
-- ✅ Set competitive daily rates
-- ✅ Car option: Select doors (2-5)
-- ✅ Bike option: Specify engine capacity
-- ✅ Simple form with validation
-- ✅ Instant addition to the fleet
+**Admin Add Vehicle Features:**
+- ✅ Choose vehicle type (Car or Bike)
+- ✅ Enter brand and model
+- ✅ Set daily rental rate
+- ✅ Car-specific: Select number of doors (2-5)
+- ✅ Bike-specific: Enter engine capacity (50-2000 cc)
+- ✅ Form validation and error messages
+- ✅ Automatic addition to database
 
 ---
 
-## 3. Customer Rent/Return Interface
+## 3. Admin Rent/Return Interface
 
-The primary feature for customers - renting and returning vehicles:
+Admins can manage vehicle rentals:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
-│  Vehicle Rental System - customer (customer)                        ⊠ ▭ ✕       │
+│  Vehicle Rental System - admin (admin)                              ⊠ ▭ ✕       │
 ├──────────────────────────────────────────────────────────────────────────────────┤
 │ ┌──────────┐ ┌──────────────────────────────────────────────────────────────┐   │
 │ │Dashboard │ │                                                                │   │
-│ │          │ │  Rent or Return Vehicles                                       │   │
-│ │ Add      │ │  ══════════════════════                                        │   │
+│ │          │ │  Rent/Return Vehicles                                          │   │
+│ │ Add      │ │  ═══════════════════                                           │   │
 │ │ Vehicle  │ │                                                                │   │
 │ │          │ │  ┌────────────────────────────────────────────────────────┐   │   │
 │ │[Rent/    │ │  │ ID │ Type │ Brand    │ Model    │ Rate/Day │ Status   │   │   │
@@ -215,38 +211,32 @@ The primary feature for customers - renting and returning vehicles:
 │              │  │Rent Selected │  │Return Selected │                         │   │
 │              │  └──────────────┘  └────────────────┘                         │   │
 │              │                                                                │   │
-│              │  How to Rent:                                                  │   │
-│              │  1. Select an Available vehicle from the table                 │   │
-│              │  2. Click "Rent Selected" to reserve it                        │   │
-│              │  3. The vehicle status will change to "Rented"                 │   │
-│              │                                                                │   │
-│              │  To Return:                                                    │   │
-│              │  1. Select a Rented vehicle (that you rented)                  │   │
-│              │  2. Click "Return Selected"                                    │   │
-│              │  3. The vehicle becomes Available again                        │   │
+│              │  Instructions:                                                 │   │
+│              │  • Select a vehicle from the table                             │   │
+│              │  • Click "Rent Selected" to mark as rented                     │   │
+│              │  • Click "Return Selected" to mark as available                │   │
 │              │                                                                │   │
 │              └──────────────────────────────────────────────────────────────┘   │
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Customer Rent/Return Features:**
-- ✅ Browse all vehicles with availability
-- ✅ Rent available vehicles instantly
-- ✅ Return rented vehicles when done
-- ✅ Clear status indicators
-- ✅ Prevents double-booking (can't rent already-rented vehicles)
-- ✅ Easy-to-use interface
-- ✅ Confirmation messages
+**Admin Rent/Return Features:**
+- ✅ View all vehicles with current status
+- ✅ Rent available vehicles
+- ✅ Return rented vehicles
+- ✅ Status validation (can't rent already-rented vehicles)
+- ✅ Confirmation dialogs
+- ✅ Real-time status updates
 
 ---
 
-## 4. Customer Manage Customers View
+## 4. Admin Manage Customers View
 
-Customers can view and manage customer profiles:
+Admins can manage customer records:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
-│  Vehicle Rental System - customer (customer)                        ⊠ ▭ ✕       │
+│  Vehicle Rental System - admin (admin)                              ⊠ ▭ ✕       │
 ├──────────────────────────────────────────────────────────────────────────────────┤
 │ ┌──────────┐ ┌──────────────────────────────────────────────────────────────┐   │
 │ │Dashboard │ │                                                                │   │
@@ -289,28 +279,27 @@ Customers can view and manage customer profiles:
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Customer Manage Customers Features:**
-- ✅ Add contact information
-- ✅ Browse customer directory
-- ✅ Network with other users
-- ✅ Manage contact list
-- ✅ Remove outdated contacts
-- ✅ Input validation for email and phone
+**Admin Manage Customers Features:**
+- ✅ Add new customers with name, email, and phone
+- ✅ View all customer records
+- ✅ Remove customers from the system
+- ✅ Input validation
+- ✅ Confirmation dialogs
 
 ---
 
-## 5. Customer Reservations View
+## 5. Admin Reservations View
 
-Customers can view their rental history and active reservations:
+Admins can view and manage all reservations:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
-│  Vehicle Rental System - customer (customer)                        ⊠ ▭ ✕       │
+│  Vehicle Rental System - admin (admin)                              ⊠ ▭ ✕       │
 ├──────────────────────────────────────────────────────────────────────────────────┤
 │ ┌──────────┐ ┌──────────────────────────────────────────────────────────────┐   │
 │ │Dashboard │ │                                                                │   │
-│ │          │ │  My Reservations                                               │   │
-│ │ Add      │ │  ═══════════════                                               │   │
+│ │          │ │  Reservations Management                                       │   │
+│ │ Add      │ │  ═══════════════════════                                       │   │
 │ │ Vehicle  │ │                                                                │   │
 │ │          │ │  ┌──────────────────────────────────────────────────────────┐ │   │
 │ │ Rent/    │ │  │ Reservation │ User    │ Vehicle  │ Start    │ End       │ │   │
@@ -318,74 +307,64 @@ Customers can view their rental history and active reservations:
 │ │          │ │  ├─────────────┼─────────┼──────────┼──────────┼───────────┤ │   │
 │ │ Manage   │ │  │ 1           │ 2       │ 4        │2024-01-15│2024-01-20 │ │   │
 │ │Customers │ │  │ 2           │ 2       │ 1        │2024-01-18│2024-01-22 │ │   │
-│ │          │ │  │ 5           │ 2       │ 7        │2024-02-01│2024-02-05 │ │   │
+│ │          │ │  │ 3           │ 3       │ 3        │2024-01-20│2024-01-25 │ │   │
 │ │[Reserva- │ │  └──────────────────────────────────────────────────────────┘ │   │
 │ │ tions]   │ │                                                                │   │
 │ └──────────┘ │  ┌──────────────────────────────────────────────────────────┐ │   │
 │              │  │ Total Cost  │ Status     │ Created At                     │ │   │
 │              │  ├─────────────┼────────────┼────────────────────────────────┤ │   │
 │              │  │ $175.00     │ active     │ 2024-01-14 10:30:00           │ │   │
-│              │  │ $200.00     │ completed  │ 2024-01-17 14:15:00           │ │   │
-│              │  │ $360.00     │ active     │ 2024-01-28 16:20:00           │ │   │
+│              │  │ $200.00     │ active     │ 2024-01-17 14:15:00           │ │   │
+│              │  │ $150.00     │ completed  │ 2024-01-19 09:45:00           │ │   │
 │              │  └──────────────────────────────────────────────────────────┘ │   │
 │              │                                                                │   │
 │              │  ┌─────────┐                                                   │   │
 │              │  │ Refresh │                                                   │   │
 │              │  └─────────┘                                                   │   │
 │              │                                                                │   │
-│              │  Summary:                                                      │   │
-│              │  • Active Reservations: 2                                      │   │
-│              │  • Completed Rentals: 1                                        │   │
-│              │  • Total Spent: $735.00                                        │   │
-│              │                                                                │   │
 │              └──────────────────────────────────────────────────────────────┘   │
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Customer Reservations Features:**
-- ✅ View personal reservation history
-- ✅ See active and past rentals
-- ✅ Track rental costs automatically calculated
-- ✅ View start and end dates
-- ✅ Check reservation status (active/completed/cancelled)
-- ✅ Refresh for latest updates
-- ✅ Summary statistics
+**Admin Reservations Features:**
+- ✅ View all reservations in the system
+- ✅ See reservation details (user, vehicle, dates, cost)
+- ✅ Track reservation status (active/completed/cancelled)
+- ✅ Database-backed persistence
+- ✅ Real-time updates
+
+---
+
+## Summary: Admin Role Capabilities
+
+As an **Admin**, users have **full access** to all system features:
+
+| Feature | Admin Access |
+|---------|--------------|
+| View Dashboard | ✅ Yes |
+| Add Vehicles | ✅ Yes |
+| Remove Vehicles | ✅ Yes |
+| Rent Vehicles | ✅ Yes |
+| Return Vehicles | ✅ Yes |
+| Manage Customers | ✅ Yes |
+| View Reservations | ✅ Yes |
+| Search & Filter | ✅ Yes |
+| Database Access | ✅ Full |
 
 ---
 
 ## Color Scheme (Dark Theme)
 
-The customer interface uses a professional dark theme:
+The admin interface uses a professional dark theme:
 
 - **Background**: Dark gray (#2b2b2b)
 - **Sidebar**: Darker gray (#1e1e1e)
 - **Accent Color**: Slate purple (#6a5acd)
 - **Text**: White (#ffffff)
 - **Borders**: Medium gray (#3d3d3d)
-- **Primary Buttons**: Purple (#6a5acd)
 - **Remove Buttons**: Red (#d32f2f)
-- **Hover Effects**: Lighter shades for interactive elements
+- **Interactive Elements**: Hover effects with lighter shades
 
 ---
 
-## Summary: Customer Role Capabilities
-
-As a **Customer**, users have **full access** to rental and community features:
-
-| Feature | Customer Access |
-|---------|-----------------|
-| View Dashboard | ✅ Yes |
-| Browse Vehicles | ✅ Yes |
-| Search & Filter | ✅ Yes |
-| Add Own Vehicles | ✅ Yes |
-| Remove Own Vehicles | ✅ Yes |
-| Rent Vehicles | ✅ Yes |
-| Return Vehicles | ✅ Yes |
-| View Customers | ✅ Yes |
-| Manage Customers | ✅ Yes |
-| View Reservations | ✅ Yes (Own) |
-| Database Access | ✅ Full |
-
----
-
-**Note**: Both admin and customer users currently have similar interfaces. Role-based UI restrictions can be added as a future enhancement to differentiate access levels.
+**Note**: All admin features are protected by the authentication system with SHA-256 password hashing.
